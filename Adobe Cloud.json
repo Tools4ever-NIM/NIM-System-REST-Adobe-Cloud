@@ -1,0 +1,113 @@
+{
+    "schema": {
+        "options": {
+            "path": ""
+        },
+        "crud_objects": {
+            "users": {
+                "operations": {
+                    "users_get": {
+                        "method": "get",
+                        "call": {
+                            "mode": "normal",
+                            "path": "/v2/usermanagement/users/{org_id}"
+                        },
+                        "processing_options": {
+                            "output_field": null
+                        },
+                        "query_parameters": {}
+                    }
+                },
+                "key": "id",
+                "resources": {
+                    "id": "string*",
+                    "firstname": "string*",
+                    "lastname": "string*",
+                    "email": "string*",
+                    "status": "string*",
+                    "username": "string*",
+                    "domain": "string*",
+                    "country": "string*",
+                    "type": "string*",
+                    "groups": "string*",
+                    "option": "string*"
+                }
+            }
+        }
+    },
+    "rest": {
+        "config": {
+            "baseUrl": "https://usermanagement.adobe.io",
+            "get": {
+                "pagination":{
+                    "mode":"generic",
+                    "params":{
+                        "page":"{page_number}"
+                    }
+                },
+                "query_parameters": {}
+            },
+            "authentication": "certificate",
+            "call_handling": "generic",
+            "test_connection": {
+                "url": "/v2/usermanagement/users/{org_id}/0"
+            }
+        },
+        "authOptions": {
+            "scopes": [
+                "https://usermanagement.adobe.io/s/ent_user_sdk"
+            ],
+            "authUrl": "https://ims-na1.adobelogin.com/ims/exchange/jwt/",
+            "type": "signed-jwt",
+            "postData": {
+                "client_id": {
+                    "name": "clientId"
+                },
+                "scope": {
+                    "name": "scope"
+                },
+                "client_assertion_type": "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
+                "client_assertion": {
+                    "name": "JWT"
+                },
+                "grant_type": "client_credentials"
+            },
+            "JWT": {
+                "aud": {
+                    "name": "https://usermanagement.adobe.io/c/{clientId}"
+                },
+                "exp": {
+                    "name": "oneHour"
+                },
+                "iss": {
+                    "name": "org_id"
+                },
+                "jti": {
+                    "name": "guid"
+                },
+                "nbf": {
+                    "name": "now"
+                },
+                "sub": {
+                    "name": "tenantId"
+                }
+            }
+        }
+    },
+    "connection": {
+        "items": [
+            {
+                "name": "org_id",
+                "type": "textbox",
+                "label": "Organization ID:",
+                "value": ""
+            },
+            {
+                "name": "client_secret",
+                "type": "textbox",
+                "label": "Client Secret:",
+                "value": ""
+            }
+        ]
+    }
+}
