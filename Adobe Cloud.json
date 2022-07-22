@@ -13,7 +13,7 @@
                             "path": "/v2/usermanagement/users/{org_id}"
                         },
                         "processing_options": {
-                            "output_field": null
+                            "output_field": "users"
                         },
                         "query_parameters": {}
                     }
@@ -40,10 +40,13 @@
             "baseUrl": "https://usermanagement.adobe.io",
             "get": {
                 "pagination":{
-                    "mode":"generic",
-                    "params":{
-                        "page":"{page_number}"
-                    }
+                    "mode":"url",
+                    "zero_based": true,
+                    "last_page": {
+                        "type": "field",
+                        "name": "lastPage"
+                    },
+                    "url_part": "/{page_number}"
                 },
                 "query_parameters": {}
             },
@@ -51,6 +54,9 @@
             "call_handling": "generic",
             "test_connection": {
                 "url": "/v2/usermanagement/users/{org_id}/0"
+            },
+            "headers": {
+                "x-api-key": "{client_id}"
             }
         },
         "authOptions": {
@@ -63,25 +69,18 @@
                 "client_id": {
                     "name": "clientId"
                 },
-                "scope": {
-                    "name": "scope"
-                },
-                "client_assertion_type": "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
-                "client_assertion": {
+                "client_secret": "{client_secret}",
+                "jwt_token": {
                     "name": "JWT"
-                },
-                "grant_type": "client_credentials"
+                }
             },
             "JWT": {
-                "aud": {
-                    "name": "https://usermanagement.adobe.io/c/{clientId}"
-                },
+                "aud": "https://ims-na1.adobelogin.com/c/{client_id}",
+                "https://ims-na1.adobelogin.com/s/ent_user_sdk": true,
                 "exp": {
                     "name": "oneHour"
                 },
-                "iss": {
-                    "name": "org_id"
-                },
+                "iss": "{org_id}",
                 "jti": {
                     "name": "guid"
                 },
