@@ -39,7 +39,7 @@ Export-Certificate -FilePath "$ExportPath\AdobeCloud.cer" -Cert $Certificate -Ty
 CertUtil -Encode "$ExportPath\AdobeCloud.cer" "$ExportPath\AdobeCloudB64.crt"
 ```
 
-##Export Public/Private Key using OpenSSL (Alternative)
+## Export Public/Private Key using OpenSSL (Alternative)
 ```
 ## Export Private Key ##
 "C:\Program Files (x86)\GnuWin32\bin\openssl.exe" pkcs12 -in <PFX PATH> -nocerts -out <PRIVATE KEY PATH>
