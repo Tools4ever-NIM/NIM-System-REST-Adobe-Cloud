@@ -6,7 +6,7 @@
         "crud_objects": {
             "users": {
                 "operations": {
-                    "users_get": {
+                    "usersList": {
                         "method": "get",
                         "call": {
                             "mode": "normal",
@@ -16,6 +16,130 @@
                             "output_field": "users"
                         },
                         "query_parameters": {}
+                    },
+                    "usersAdobeCreate": {
+                        "method": "post",
+                        "call": {
+                            "mode": "normal",
+                            "path": "/v2/usermanagement/action/{org_id}"
+                        },
+                        "query_parameters": {},
+                        "body":{
+                            "requestID": "Tools4ever.NIM.{username}.AddAdobeID",
+                            "user": "{username}",
+                            "do": [
+                                {
+                                    "addAdobeID": {
+                                        "email": "{email}",
+                                        "country": "{country}",
+                                        "firstname": "{firstname}",
+                                        "lastname": "{lastname}",
+                                        "option": "{option}"
+                                    }
+                                }
+                            ]
+                        },
+                        "semantics": "create",
+                        "resource_allowance_default": "mandatory",
+                        "resource_mandatory": [
+                            "firstName",
+                            "lastname",
+                            "email",
+                            "country",
+                            "username",
+                            "option"
+                        ]
+                    },
+                    "usersFederatedCreate": {
+                        "method": "post",
+                        "call": {
+                            "mode": "normal",
+                            "path": "/v2/usermanagement/action/{org_id}"
+                        },
+                        "query_parameters": {},
+                        "body":{
+                            "requestID": "Tools4ever.NIM.{username}.CreateFederatedID",
+                            "user": "{username}",
+                            "do": [
+                                {
+                                    "createFederatedID": {
+                                        "email": "{email}",
+                                        "country": "{country}",
+                                        "firstname": "{firstname}",
+                                        "lastname": "{lastname}",
+                                        "option": "{option}"
+                                    }
+                                }
+                            ]
+                        },
+                        "semantics": "create",
+                        "resource_allowance_default": "mandatory",
+                        "resource_mandatory": [
+                            "firstName",
+                            "lastname",
+                            "email",
+                            "country",
+                            "username",
+                            "option"
+                        ]
+                    },
+                    "usersEnterpriseCreate": {
+                        "method": "post",
+                        "call": {
+                            "mode": "normal",
+                            "path": "/v2/usermanagement/action/{org_id}"
+                        },
+                        "query_parameters": {},
+                        "body":{
+                            "requestID": "Tools4ever.NIM.{username}.CreateEnterpriseID",
+                            "user": "{username}",
+                            "do": [
+                                {
+                                    "createFederatedID": {
+                                        "email": "{email}",
+                                        "country": "{country}",
+                                        "firstname": "{firstname}",
+                                        "lastname": "{lastname}",
+                                        "option": "{option}"
+                                    }
+                                }
+                            ]
+                        },
+                        "semantics": "create",
+                        "resource_allowance_default": "mandatory",
+                        "resource_mandatory": [
+                            "firstName",
+                            "lastname",
+                            "email",
+                            "country",
+                            "username",
+                            "option"
+                        ]
+                    },
+                    "usersDelete": {
+                        "method": "post",
+                        "call": {
+                            "mode": "normal",
+                            "path": "/v2/usermanagement/action/{org_id}"
+                        },
+                        "query_parameters": {},
+                        "body":{
+                            "requestID": "Tools4ever.NIM.{username}.Delete",
+                            "user": "{username}",
+                            "do": [
+                                {
+                                    "removeFromOrg": {
+                                        "deleteAccount": "{deleteAccount}"
+                                    }
+                                }
+                            ]
+                        },
+                        "semantics": "update",
+                        "resource_allowance_default": "optional",
+                        "resource_mandatory": [
+                            "username",
+                            "deleteAccount"
+                        ]
                     }
                 },
                 "key": "id",
@@ -30,7 +154,171 @@
                     "country": "string*",
                     "type": "string*",
                     "groups": "string*",
+                    "option": "string*",
+                    "deleteAccount": "boolean*"
+                }
+            },
+            "groups": {
+                "operations": {
+                    "groupsList": {
+                        "method": "get",
+                        "call": {
+                            "mode": "normal",
+                            "path": "/v2/usermanagement/groups/{org_id}"
+                        },
+                        "processing_options": {
+                            "output_field": "groups"
+                        },
+                        "query_parameters": {}
+                    },
+                    "groupsCreate": {
+                        "method": "post",
+                        "call": {
+                            "mode": "normal",
+                            "path": "/v2/usermanagement/action/{org_id}"
+                        },
+                        "query_parameters": {},
+                        "body":{
+                            "requestID": "Tools4ever.NIM.{groupName}.Create",
+                            "usergroup": "{groupName}",
+                            "do": [
+                                {
+                                    "createUserGroup": {
+                                      "name": "{groupName}",
+                                      "option": "{option}",
+                                      "description": "{description}"
+                                    }
+                                }
+                            ]
+                        },
+                        "semantics": "create",
+                        "resource_allowance_default": "mandatory",
+                        "resource_mandatory": [
+                            "groupName",
+                            "description",
+                            "option"
+                        ]
+                    },
+                    "groupsDelete": {
+                        "method": "post",
+                        "call": {
+                            "mode": "normal",
+                            "path": "/v2/usermanagement/action/{org_id}"
+                        },
+                        "query_parameters": {},
+                        "body":{
+                            "requestID": "Tools4ever.NIM.{groupName}.Delete",
+                            "usergroup": "{groupName}",
+                            "do": [
+                                {
+                                    "deleteUserGroup": {}
+                                }
+                            ]
+                        },
+                        "semantics": "delete",
+                        "resource_allowance_default": "mandatory",
+                        "resource_mandatory": [
+                            "groupName"
+                        ]
+                    }
+                },
+                "key": "groupId",
+                "resources": {
+                    "type": "string*",
+                    "memberCount": "string*",
+                    "adminGroupName": "string*",
+                    "groupName": "string*",
+                    "userGroupName": "string*",
+                    "productProfileName": "string*",
+                    "productName": "string*",
+                    "licenseQuota": "string*",
+                    "groupId": "string*",
+                    "name": "string*",
+                    "description": "string*",
                     "option": "string*"
+                }
+            },
+            "groupMembers": {
+                "operations": {
+                    "groupMembersList": {
+                        "method": "get",
+                        "call": {
+                            "mode": "iteration",
+                            "table": "groups",
+                            "iterator": "groupName",
+                            "path": "/v2/usermanagement/users/{org_id}/{page_number}/{iterator}",
+                            "base": {
+                                "groupName": "{iterator}"
+                            }
+                        },
+                        "processing_options": {
+                            "output_field": "groups"
+                        },
+                        "query_parameters": {}
+                    },
+                    "groupMembersAdd": {
+                        "method": "post",
+                        "call": {
+                            "mode": "normal",
+                            "path": "/v2/usermanagement/action/{org_id}"
+                        },
+                        "query_parameters": {},
+                        "body":{
+                            "requestID": "Tools4ever.NIM.{groupName}.{username}.Add",
+                            "usergroup": "{groupName}",
+                            "do": [
+                                {
+                                    "add": {
+                                        "user": ["username"]
+                                    }
+                                }
+                            ]
+                        },
+                        "semantics": "create",
+                        "resource_allowance_default": "mandatory",
+                        "resource_mandatory": [
+                            "groupName",
+                            "username"
+                        ]
+                    },
+                    "groupMembersRemove": {
+                        "method": "post",
+                        "call": {
+                            "mode": "normal",
+                            "path": "/v2/usermanagement/action/{org_id}"
+                        },
+                        "query_parameters": {},
+                        "body":{
+                            "requestID": "Tools4ever.NIM.{groupName}.{username}.Remove",
+                            "usergroup": "{groupName}",
+                            "do": [
+                                {
+                                    "remove": {
+                                        "user": ["username"]
+                                    }
+                                }
+                            ]
+                        },
+                        "semantics": "delete",
+                        "resource_allowance_default": "mandatory",
+                        "resource_mandatory": [
+                            "groupName",
+                            "username"
+                        ]
+                    }
+                },
+                "key": "groupName",
+                "resources": {
+                    "groupName":"string*",
+                    "id": "string*",
+                    "firstname": "string*",
+                    "lastname": "string*",
+                    "email": "string*",
+                    "status": "string*",
+                    "username": "string*",
+                    "domain": "string*",
+                    "country": "string*",
+                    "type": "string*"
                 }
             }
         }
