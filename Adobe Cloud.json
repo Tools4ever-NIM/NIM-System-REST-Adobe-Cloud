@@ -10,7 +10,7 @@
                         "method": "get",
                         "call": {
                             "mode": "normal",
-                            "path": "/v2/usermanagement/users/{org_id}"
+                            "path": "/v2/usermanagement/users/{org_id}/{page_number}"
                         },
                         "processing_options": {
                             "output_field": "users"
@@ -164,7 +164,7 @@
                         "method": "get",
                         "call": {
                             "mode": "normal",
-                            "path": "/v2/usermanagement/groups/{org_id}"
+                            "path": "/v2/usermanagement/groups/{org_id}/{page_number}"
                         },
                         "processing_options": {
                             "output_field": "groups"
@@ -334,7 +334,7 @@
                         "type": "field",
                         "name": "lastPage"
                     },
-                    "url_part": "/{page_number}"
+                    "replace_in_url": true
                 },
                 "query_parameters": {}
             },
