@@ -142,7 +142,7 @@
                         ]
                     }
                 },
-                "key": "id",
+                "key": "username",
                 "resources": {
                     "id": "string*",
                     "firstname": "string*",
@@ -222,7 +222,7 @@
                         ]
                     }
                 },
-                "key": "groupId",
+                "key": "groupName",
                 "resources": {
                     "type": "string*",
                     "memberCount": "string*",
@@ -252,7 +252,7 @@
                             }
                         },
                         "processing_options": {
-                            "output_field": "groups"
+                            "output_field": "users"
                         },
                         "query_parameters": {}
                     },
@@ -307,7 +307,19 @@
                         ]
                     }
                 },
-                "key": "groupName",
+                "groupmembership": {
+                    "add_operation": "groupMembersAdd",
+                    "remove_operation": "groupMembersRemove",
+                    "member_table": "users",
+                    "group_table": "groups",
+                    "member_attributes": {
+                        "username": "username"
+                    },
+                    "group_attributes": {
+                        "groupName": "groupName"
+                    }
+                },
+                "key": "username",
                 "resources": {
                     "groupName":"string*",
                     "id": "string*",
