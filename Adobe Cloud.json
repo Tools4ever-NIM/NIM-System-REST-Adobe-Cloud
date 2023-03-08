@@ -73,7 +73,7 @@
                             ]
                         },
                         "semantics": "create",
-                        "resource_allowance_default": "mandatory",
+                        "resource_allowance_default": "prohibited",
                         "resource_mandatory": [
                             "firstName",
                             "lastname",
@@ -192,7 +192,7 @@
                             ]
                         },
                         "semantics": "create",
-                        "resource_allowance_default": "mandatory",
+                        "resource_allowance_default": "prohibited",
                         "resource_mandatory": [
                             "groupName",
                             "description",
@@ -216,7 +216,7 @@
                             ]
                         },
                         "semantics": "delete",
-                        "resource_allowance_default": "mandatory",
+                        "resource_allowance_default": "prohibited",
                         "resource_mandatory": [
                             "groupName"
                         ]
