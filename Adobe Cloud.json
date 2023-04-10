@@ -24,7 +24,7 @@
                             "path": "/v2/usermanagement/action/{org_id}"
                         },
                         "query_parameters": {},
-                        "body":{
+                        "body":[{
                             "requestID": "Tools4ever.NIM.{username}.AddAdobeID",
                             "user": "{username}",
                             "do": [
@@ -38,11 +38,11 @@
                                     }
                                 }
                             ]
-                        },
+                        }],
                         "semantics": "create",
                         "resource_allowance_default": "mandatory",
                         "resource_mandatory": [
-                            "firstName",
+                            "firstname",
                             "lastname",
                             "email",
                             "country",
@@ -57,7 +57,7 @@
                             "path": "/v2/usermanagement/action/{org_id}"
                         },
                         "query_parameters": {},
-                        "body":{
+                        "body":[{
                             "requestID": "Tools4ever.NIM.{username}.CreateFederatedID",
                             "user": "{username}",
                             "do": [
@@ -71,11 +71,11 @@
                                     }
                                 }
                             ]
-                        },
+                        }],
                         "semantics": "create",
                         "resource_allowance_default": "prohibited",
                         "resource_mandatory": [
-                            "firstName",
+                            "firstname",
                             "lastname",
                             "email",
                             "country",
@@ -90,7 +90,7 @@
                             "path": "/v2/usermanagement/action/{org_id}"
                         },
                         "query_parameters": {},
-                        "body":{
+                        "body":[{
                             "requestID": "Tools4ever.NIM.{username}.CreateEnterpriseID",
                             "user": "{username}",
                             "do": [
@@ -104,11 +104,11 @@
                                     }
                                 }
                             ]
-                        },
+                        }],
                         "semantics": "create",
                         "resource_allowance_default": "mandatory",
                         "resource_mandatory": [
-                            "firstName",
+                            "firstname",
                             "lastname",
                             "email",
                             "country",
@@ -123,7 +123,7 @@
                             "path": "/v2/usermanagement/action/{org_id}"
                         },
                         "query_parameters": {},
-                        "body":{
+                        "body":[{
                             "requestID": "Tools4ever.NIM.{username}.Delete",
                             "user": "{username}",
                             "do": [
@@ -133,7 +133,7 @@
                                     }
                                 }
                             ]
-                        },
+                        }],
                         "semantics": "update",
                         "resource_allowance_default": "optional",
                         "resource_mandatory": [
