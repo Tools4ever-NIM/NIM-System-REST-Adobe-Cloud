@@ -263,17 +263,17 @@
                             "path": "/v2/usermanagement/action/{org_id}"
                         },
                         "query_parameters": {},
-                        "body":{
+                        "body":[{
+                            "user": "{username}",
                             "requestID": "Tools4ever.NIM.{groupName}.{username}.Add",
-                            "usergroup": "{groupName}",
                             "do": [
                                 {
                                     "add": {
-                                        "user": ["username"]
+                                        "group": ["{groupName}"]
                                     }
                                 }
                             ]
-                        },
+                        }],
                         "semantics": "create",
                         "resource_allowance_default": "mandatory",
                         "resource_mandatory": [
@@ -288,17 +288,17 @@
                             "path": "/v2/usermanagement/action/{org_id}"
                         },
                         "query_parameters": {},
-                        "body":{
+                        "body":[{
+                            "user": "{username}",
                             "requestID": "Tools4ever.NIM.{groupName}.{username}.Remove",
-                            "usergroup": "{groupName}",
                             "do": [
                                 {
-                                    "remove": {
-                                        "user": ["username"]
+                                    "add": {
+                                        "group": ["{groupName}"]
                                     }
                                 }
                             ]
-                        },
+                        }],
                         "semantics": "delete",
                         "resource_allowance_default": "mandatory",
                         "resource_mandatory": [
