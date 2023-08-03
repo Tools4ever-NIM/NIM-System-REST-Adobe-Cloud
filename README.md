@@ -14,11 +14,13 @@
 - Create Integration
 - Access an API
 - Adobe Service > User Management API
-- You will then be asked for Name, Description and Public Key. 
-  - A self-signed certificate will need to be generated on IAM Server, so the certificate and private key are available. 
-  - Upload the public key file (must be a .CRT or .PEM)
-  - See below snippets on how to generate a certificate/public key. If you have Server 2016+ you can use PowerShell to generate the key, otherwise use the OpenSSL alternative.
+- You will then be asked for Name, Description and Public Key.
+  - A self-signed certificate will need to be generated on NIM Server, so the certificate and private key are available.
+  - Import certificate with private key (.PFX) into NIM
+  - Upload the public key file as a .CRT or .PEM (*B64.crt from snippet below)
+  - See below snippets on how to generate a certificate/public key. If you have Server 2016+ you can use PowerShell to generate the key, otherwise use the OpenSSL alternative. 
 - Gather Client Credentials for access
+  - Technical Account ID => Directory (tenant) ID
 
 
 ## Generate Certificate
@@ -27,10 +29,10 @@
 $Name           = "NIM"
 $ExportPath     = "C:\Data"           # Path to export cert
 $Password       = "MySecretPassword"  # Passphrase on cert
-$CertTtlMonths  = 24                  # Lifespan of the cert in months
+$CertTtlYears   = 2                   # Lifespan of the cert in months
  
 $SecurePwd      = ConvertTo-SecureString -String $Password -Force -AsPlainText
-$Certificate    = New-SelfSignedCertificate -DnsName $Name -CertStoreLocation "cert:\LocalMachine\My" -Provider "Microsoft Enhanced RSA and AES Cryptographic Provider" -HashAlgorithm "SHA256" -NotAfter (Get-Date).AddYears($CertTtlMonths)
+$Certificate    = New-SelfSignedCertificate -DnsName $Name -CertStoreLocation "cert:\LocalMachine\My" -Provider "Microsoft Enhanced RSA and AES Cryptographic Provider" -HashAlgorithm "SHA256" -NotAfter (Get-Date).AddYears($CertTtlYears)
 Get-ChildItem -Path ("cert:\localMachine\My\" + $Certificate[0].Thumbprint ) | Export-PfxCertificate -FilePath "$ExportPath\AdobeCloud.pfx" -Password $SecurePwd
   
   
