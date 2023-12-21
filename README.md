@@ -1,54 +1,19 @@
-# NIM-System-REST-Adobe-Cloud
-<p align="center">
-  <img src="assets/logo.png">
-</p>
+# Adobe Cloud
+<img src="https://github.com/Tools4ever-NIM/NIM-System-REST-Adobe-Cloud/assets/24281600/07a765aa-432b-41b6-8a8b-8274d1c2306b" width="256px" />
 
-## Current Available Data
+
+## Data Tables
 - Users
 - Groups
 - Group Members
 
-## Setup API Access
-- Login to https://console.adobe.io/
-- View Integrations
-- Create Integration
-- Access an API
-- Adobe Service > User Management API
-- You will then be asked for Name, Description and Public Key.
-  - A self-signed certificate will need to be generated on NIM Server, so the certificate and private key are available.
-  - Import certificate with private key (.PFX) into NIM
-  - Upload the public key file as a .CRT or .PEM (*B64.crt from snippet below)
-  - See below snippets on how to generate a certificate/public key. If you have Server 2016+ you can use PowerShell to generate the key, otherwise use the OpenSSL alternative. 
-- Gather Client Credentials for access
-  - Technical Account ID => Directory (tenant) ID
+## Actions
+- Users
+    - Create/Delete
+- Groups
+    - Create/Delete
+- Group Members
+    - Add/Remove
 
-
-## Generate Certificate
-```
-### Create Self-Signed Certificate (only works Windows 8.1, 10, Server 2016+ ###
-$Name           = "NIM"
-$ExportPath     = "C:\Data"           # Path to export cert
-$Password       = "MySecretPassword"  # Passphrase on cert
-$CertTtlYears   = 2                   # Lifespan of the cert in months
- 
-$SecurePwd      = ConvertTo-SecureString -String $Password -Force -AsPlainText
-$Certificate    = New-SelfSignedCertificate -DnsName $Name -CertStoreLocation "cert:\LocalMachine\My" -Provider "Microsoft Enhanced RSA and AES Cryptographic Provider" -HashAlgorithm "SHA256" -NotAfter (Get-Date).AddYears($CertTtlYears)
-Get-ChildItem -Path ("cert:\localMachine\My\" + $Certificate[0].Thumbprint ) | Export-PfxCertificate -FilePath "$ExportPath\AdobeCloud.pfx" -Password $SecurePwd
-  
-  
-### Export Public Key (Required Server 2016+) ###
-Export-Certificate -FilePath "$ExportPath\AdobeCloud.cer" -Cert $Certificate -Type CERT -NoClobber
-CertUtil -Encode "$ExportPath\AdobeCloud.cer" "$ExportPath\AdobeCloudB64.crt"
-```
-
-## Export Public/Private Key using OpenSSL (Alternative)
-```
-## Export Private Key ##
-"C:\Program Files (x86)\GnuWin32\bin\openssl.exe" pkcs12 -in <PFX PATH> -nocerts -out <PRIVATE KEY PATH>
- 
-## Export Cert ##
-"C:\Program Files (x86)\GnuWin32\bin\openssl.exe" pkcs12 -in <PFX PATH> -clcerts -nokeys -out <CERTIFICATE PATH>
- 
-## Remove PassPhrase from Cert ##
-"C:\Program Files (x86)\GnuWin32\bin\openssl.exe" rsa -in <PRIVATE KEY PATH> -out <RSA PRIVATE KEY PATH>
-```
+# NIM Docs
+The official NIM documentation can be found at: https://docs.nimsuite.com
