@@ -222,7 +222,7 @@
                         ]
                     }
                 },
-                "key": "groupName",
+                "key": "groupId",
                 "resources": {
                     "type": "string*",
                     "memberCount": "string*",
@@ -245,10 +245,10 @@
                         "call": {
                             "mode": "iteration",
                             "table": "groups",
-                            "iterator": "groupName",
+                            "iterator": "groupId",
                             "path": "/v2/usermanagement/users/{org_id}/{page_number}/{iterator}",
                             "base": {
-                                "groupName": "{iterator}"
+                                "groupId": "{iterator}"
                             }
                         },
                         "processing_options": {
@@ -265,11 +265,11 @@
                         "query_parameters": {},
                         "body":[{
                             "user": "{username}",
-                            "requestID": "Tools4ever.NIM.{groupName}.{username}.Add",
+                            "requestID": "Tools4ever.NIM.{groupId}.{username}.Add",
                             "do": [
                                 {
                                     "add": {
-                                        "group": ["{groupName}"]
+                                        "group": ["{groupId}"]
                                     }
                                 }
                             ]
@@ -277,7 +277,7 @@
                         "semantics": "create",
                         "resource_allowance_default": "mandatory",
                         "resource_mandatory": [
-                            "groupName",
+                            "groupId",
                             "username"
                         ]
                     },
@@ -290,11 +290,11 @@
                         "query_parameters": {},
                         "body":[{
                             "user": "{username}",
-                            "requestID": "Tools4ever.NIM.{groupName}.{username}.Remove",
+                            "requestID": "Tools4ever.NIM.{groupId}.{username}.Remove",
                             "do": [
                                 {
                                     "add": {
-                                        "group": ["{groupName}"]
+                                        "group": ["{groupId}"]
                                     }
                                 }
                             ]
@@ -302,7 +302,7 @@
                         "semantics": "delete",
                         "resource_allowance_default": "mandatory",
                         "resource_mandatory": [
-                            "groupName",
+                            "groupId",
                             "username"
                         ]
                     }
@@ -316,12 +316,12 @@
                         "username": "username"
                     },
                     "group_attributes": {
-                        "groupName": "groupName"
+                        "groupId": "groupId"
                     }
                 },
-                "key": "username",
+                "key": "id",
                 "resources": {
-                    "groupName":"string*",
+                    "groupId":"string*",
                     "id": "string*",
                     "firstname": "string*",
                     "lastname": "string*",
@@ -355,6 +355,39 @@
             "test_connection": {
                 "url": "/v2/usermanagement/users/{org_id}/0"
             },
+			"socket_timeout": 3600000,
+			"retry": [
+			{
+              "type": "statusCode",
+              "statusCode": 400,
+              "retry": {
+                  "type": "simple",
+                  "maxCount": 12,
+                  "waitTime": 5
+              }
+          },
+          {
+              "type": "statusCode",
+              "statusCode": 429,
+              "retry": {
+                  "type": "simple",
+                  "maxCount": 12,
+                  "waitTime": 5
+              }
+          },
+          {
+              "type": "statusCode",
+              "statusCode": 500,
+              "retry": {
+                  "type": "simple",
+                  "maxCount": 12,
+                  "waitTime": 5
+              }
+          },
+          {
+              "type": "connectionError"
+          }
+      ],
             "headers": {
                 "x-api-key": "{client_id}"
             }
