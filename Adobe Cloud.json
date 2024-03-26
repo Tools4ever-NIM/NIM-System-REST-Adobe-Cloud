@@ -222,7 +222,7 @@
                         ]
                     }
                 },
-                "key": "groupName",
+                "key": "groupId",
                 "resources": {
                     "type": "string*",
                     "memberCount": "string*",
@@ -245,10 +245,10 @@
                         "call": {
                             "mode": "iteration",
                             "table": "groups",
-                            "iterator": "groupName",
+                            "iterator": "groupId",
                             "path": "/v2/usermanagement/users/{org_id}/{page_number}/{iterator}",
                             "base": {
-                                "groupName": "{iterator}"
+                                "groupId": "{iterator}"
                             }
                         },
                         "processing_options": {
@@ -265,11 +265,11 @@
                         "query_parameters": {},
                         "body":[{
                             "user": "{username}",
-                            "requestID": "Tools4ever.NIM.{groupName}.{username}.Add",
+                            "requestID": "Tools4ever.NIM.{groupId}.{username}.Add",
                             "do": [
                                 {
                                     "add": {
-                                        "group": ["{groupName}"]
+                                        "group": ["{groupId}"]
                                     }
                                 }
                             ]
@@ -277,7 +277,7 @@
                         "semantics": "create",
                         "resource_allowance_default": "mandatory",
                         "resource_mandatory": [
-                            "groupName",
+                            "groupId",
                             "username"
                         ]
                     },
@@ -290,11 +290,11 @@
                         "query_parameters": {},
                         "body":[{
                             "user": "{username}",
-                            "requestID": "Tools4ever.NIM.{groupName}.{username}.Remove",
+                            "requestID": "Tools4ever.NIM.{groupId}.{username}.Remove",
                             "do": [
                                 {
                                     "add": {
-                                        "group": ["{groupName}"]
+                                        "group": ["{groupId}"]
                                     }
                                 }
                             ]
@@ -302,7 +302,7 @@
                         "semantics": "delete",
                         "resource_allowance_default": "mandatory",
                         "resource_mandatory": [
-                            "groupName",
+                            "groupId",
                             "username"
                         ]
                     }
@@ -316,12 +316,12 @@
                         "username": "username"
                     },
                     "group_attributes": {
-                        "groupName": "groupName"
+                        "groupId": "groupId"
                     }
                 },
-                "key": "username",
+                "key": "id",
                 "resources": {
-                    "groupName":"string*",
+                    "groupId":"string*",
                     "id": "string*",
                     "firstname": "string*",
                     "lastname": "string*",
@@ -350,7 +350,7 @@
                 },
                 "query_parameters": {}
             },
-            "authentication": "certificate",
+            "authentication": "client_credentials",
             "call_handling": "generic",
             "test_connection": {
                 "url": "/v2/usermanagement/users/{org_id}/0"
@@ -361,36 +361,10 @@
         },
         "authOptions": {
             "scopes": [
-                "https://usermanagement.adobe.io/s/ent_user_sdk"
+                "openid", "user_management_sdk","AdobeID"
             ],
-            "authUrl": "https://ims-na1.adobelogin.com/ims/exchange/jwt/",
-            "type": "signed-jwt",
-            "postData": {
-                "client_id": {
-                    "name": "clientId"
-                },
-                "client_secret": "{client_secret}",
-                "jwt_token": {
-                    "name": "JWT"
-                }
-            },
-            "JWT": {
-                "aud": "https://ims-na1.adobelogin.com/c/{client_id}",
-                "https://ims-na1.adobelogin.com/s/ent_user_sdk": true,
-                "exp": {
-                    "name": "oneHour"
-                },
-                "iss": "{org_id}",
-                "jti": {
-                    "name": "guid"
-                },
-                "nbf": {
-                    "name": "now"
-                },
-                "sub": {
-                    "name": "tenantId"
-                }
-            }
+            "authUrl": "https://ims-na1.adobelogin.com/ims/token/v2",
+            "directToken": true
         }
     },
     "connection": {
@@ -399,12 +373,6 @@
                 "name": "org_id",
                 "type": "textbox",
                 "label": "Organization ID:",
-                "value": ""
-            },
-            {
-                "name": "client_secret",
-                "type": "textbox",
-                "label": "Client Secret:",
                 "value": ""
             }
         ]
