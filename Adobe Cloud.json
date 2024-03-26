@@ -350,80 +350,21 @@
                 },
                 "query_parameters": {}
             },
-            "authentication": "certificate",
+            "authentication": "client_credentials",
             "call_handling": "generic",
             "test_connection": {
                 "url": "/v2/usermanagement/users/{org_id}/0"
             },
-			"socket_timeout": 3600000,
-			"retry": [
-			{
-              "type": "statusCode",
-              "statusCode": 400,
-              "retry": {
-                  "type": "simple",
-                  "maxCount": 12,
-                  "waitTime": 5
-              }
-          },
-          {
-              "type": "statusCode",
-              "statusCode": 429,
-              "retry": {
-                  "type": "simple",
-                  "maxCount": 12,
-                  "waitTime": 5
-              }
-          },
-          {
-              "type": "statusCode",
-              "statusCode": 500,
-              "retry": {
-                  "type": "simple",
-                  "maxCount": 12,
-                  "waitTime": 5
-              }
-          },
-          {
-              "type": "connectionError"
-          }
-      ],
             "headers": {
                 "x-api-key": "{client_id}"
             }
         },
         "authOptions": {
             "scopes": [
-                "https://usermanagement.adobe.io/s/ent_user_sdk"
+                "openid", "user_management_sdk","AdobeID"
             ],
-            "authUrl": "https://ims-na1.adobelogin.com/ims/exchange/jwt/",
-            "type": "signed-jwt",
-            "postData": {
-                "client_id": {
-                    "name": "clientId"
-                },
-                "client_secret": "{client_secret}",
-                "jwt_token": {
-                    "name": "JWT"
-                }
-            },
-            "JWT": {
-                "aud": "https://ims-na1.adobelogin.com/c/{client_id}",
-                "https://ims-na1.adobelogin.com/s/ent_user_sdk": true,
-                "exp": {
-                    "name": "oneHour"
-                },
-                "iss": "{org_id}",
-                "jti": {
-                    "name": "guid"
-                },
-                "nbf": {
-                    "name": "now"
-                },
-                "sub": {
-                    "name": "tenantId"
-                }
-            }
+            "authUrl": "https://ims-na1.adobelogin.com/ims/token/v2",
+            "directToken": true
         }
     },
     "connection": {
@@ -432,12 +373,6 @@
                 "name": "org_id",
                 "type": "textbox",
                 "label": "Organization ID:",
-                "value": ""
-            },
-            {
-                "name": "client_secret",
-                "type": "textbox",
-                "label": "Client Secret:",
                 "value": ""
             }
         ]
