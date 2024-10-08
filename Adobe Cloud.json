@@ -293,7 +293,7 @@
                             "requestID": "Tools4ever.NIM.{groupId}.{username}.Remove",
                             "do": [
                                 {
-                                    "add": {
+                                    "remove": {
                                         "group": ["{groupId}"]
                                     }
                                 }
