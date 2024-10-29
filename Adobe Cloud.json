@@ -40,7 +40,7 @@
                             ]
                         }],
                         "semantics": "create",
-                        "resource_allowance_default": "mandatory",
+                        "resource_allowance_default": "prohibited",
                         "resource_mandatory": [
                             "firstname",
                             "lastname",
@@ -106,7 +106,7 @@
                             ]
                         }],
                         "semantics": "create",
-                        "resource_allowance_default": "mandatory",
+                        "resource_allowance_default": "prohibited",
                         "resource_mandatory": [
                             "firstname",
                             "lastname",
@@ -275,7 +275,7 @@
                             ]
                         }],
                         "semantics": "create",
-                        "resource_allowance_default": "mandatory",
+                        "resource_allowance_default": "prohibited",
                         "resource_mandatory": [
                             "groupId",
                             "username"
@@ -300,7 +300,7 @@
                             ]
                         }],
                         "semantics": "delete",
-                        "resource_allowance_default": "mandatory",
+                        "resource_allowance_default": "prohibited",
                         "resource_mandatory": [
                             "groupId",
                             "username"
